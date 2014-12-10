@@ -1,6 +1,4 @@
-Testing Git Push!a
+Testing Git branch
 ==================
-
-LALALALAL
 
 Themaopdracht6
