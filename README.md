@@ -1,4 +1,4 @@
-The most awesome project evaaaahhhhhh
+It works!
 ==================
 
 Themaopdracht6
