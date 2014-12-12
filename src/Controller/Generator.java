@@ -64,6 +64,13 @@ public class Generator {
 		
 		for (HashMap.Entry<String, String> replacement : hm.entrySet()) {
 			unfinishedTemplate = unfinishedTemplate.replace(replacement.getKey(), replacement.getValue());
+			String[] array = replacement.getValue().split(".");
+			String object = array[0];
+			String attribute = array[1];
+			switch (object) {
+            case "businessrule": ;
+            break;
+			}
 		}
 		finishedTemplate= unfinishedTemplate;
 		return finishedTemplate;
