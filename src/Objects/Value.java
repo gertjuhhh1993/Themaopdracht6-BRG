@@ -2,7 +2,7 @@ package Objects;
 
 public class Value {
 	private int order;
-	private int value;
+	private String value;
 	
 	public int getOrder() {
 		return order;
@@ -10,10 +10,10 @@ public class Value {
 	public void setOrder(int order) {
 		this.order = order;
 	}
-	public int getValue() {
+	public String getValue() {
 		return value;
 	}
-	public void setValue(int value) {
+	public void setValue(String value) {
 		this.value = value;
 	}
 }

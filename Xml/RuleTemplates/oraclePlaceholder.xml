@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<!-- First entrys are for the different ruletypes
+after these definitions you can add what to replace the placeholders with. the key is the #placeholder and the value is the dbcolumn name
+ -->
+	
+
+<entry key="#triggername">businessrule.name</entry>
+<entry key="#column">attribute.kolom</entry>
+
+
+</properties>
+

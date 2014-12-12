@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="range">CREATE or REPLACE TRIGGER #triggername
+	BEFORE INSERT or UPDATE OF #column ON #scheme,#table
+	FOR EACH ROW
+	DECLARE
+	E_RANGEEXCEPTION EXCEPTION;
+	BEGIN
+	IF :new.#column #operator #value1 AND #value2 THEN
+	RAISE E_RANGEEXCEPTION;
+	END IF;
+	EXCEPTION
+	WHEN E_RANGEEXCEPTION THEN
+	  RAISE_APPLICATION_ERROR
+	        (-20001, 'E_RANGEEXCEPTION - Value cannot be between 
+	#value1 and #value2');
+	END;</entry>
+	
+	<entry key="compare">
+	
+	</entry>
+</properties>
+

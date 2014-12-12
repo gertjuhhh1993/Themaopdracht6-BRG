@@ -1,15 +1,46 @@
 package DButil;
 
-import DAO.DAO;
-import Controller.Oraclecon;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.InvalidPropertiesFormatException;
+import java.util.Properties;
 
 public abstract class DBcon {
-	protected String username;
-	protected String password;
-	protected String serverName;
-	protected String dbName;
-	protected String portNumber;
 	protected String dbms;
+	protected String jarFile;
+	protected String dbName;
+	protected String userName;
+	protected String password;
+	protected String sid;
+	protected String urlString;
 
-	public void getConnection() {}
+	protected String driver;
+	protected String serverName;
+	protected int portNumber;
+	protected Properties prop;
+
+	protected void setProperties(String fileName) throws FileNotFoundException,
+			IOException, InvalidPropertiesFormatException {
+		this.prop = new Properties();
+		FileInputStream fis = new FileInputStream(fileName);
+		prop.loadFromXML(fis);
+
+		this.dbms = this.prop.getProperty("dbms");
+		this.jarFile = this.prop.getProperty("jar_file");
+		this.driver = this.prop.getProperty("driver");
+		this.dbName = this.prop.getProperty("database_name");
+		this.userName = this.prop.getProperty("user_name");
+		this.password = this.prop.getProperty("password");
+		this.sid = this.prop.getProperty("sid");
+		this.serverName = this.prop.getProperty("server_name");
+		this.portNumber = Integer
+				.parseInt(this.prop.getProperty("port_number"));
+		System.out.print(prop);
+	}
+
+	public abstract Connection getConnection() throws SQLException;
 }

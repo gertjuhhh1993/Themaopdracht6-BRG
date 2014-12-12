@@ -8,11 +8,11 @@ import java.sql.SQLException;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
-public class MySQLcon extends DBcon {
+public class Oraclecon extends DBcon {
 	
-	public MySQLcon() throws FileNotFoundException, InvalidPropertiesFormatException, IOException{
+	public Oraclecon() throws FileNotFoundException, InvalidPropertiesFormatException, IOException{
 		super();
-		super.setProperties("Xml/Db/mysql-properties.xml");
+		super.setProperties("Xml/Db/oracle-properties.xml");
 	}
 	public final Connection getConnection() throws SQLException{
 		Connection conn = null;
@@ -22,10 +22,10 @@ public class MySQLcon extends DBcon {
 		connectionProps.put("password", super.password);
 	
 		String currentUrlString = null;
-			currentUrlString = "jdbc:" + super.dbms + "://" + super.serverName + "/" + super.dbName + "?user=" + super.userName + "&password=" + super.password;
+			currentUrlString = "jdbc:" + super.dbms + ":thin:@" + super.serverName + ":" + super.portNumber + ":" + super.sid;
 			System.out.println(currentUrlString);
 			//				  jdbc:oracle:thin:@" + host + ":" + port + ":" + sid, user, password);
-			// String test = jdbc:mysql://localhost/test?user=super.userName&password=super.password
+			// String test = "jdbc:oracle:thin:@145.89.21.30:8521:cursus01";
 			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
 			conn = DriverManager.getConnection(currentUrlString,
 					connectionProps);
