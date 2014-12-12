@@ -14,7 +14,7 @@ import DAO.DAOValue;
 
 
 public class Businessrule {
-	private String name;//xxx_xxxxx
+	private String name;
 	private String businessruletype;
 	private String operator;
 	public ArrayList<Value> values = new ArrayList<Value>();
