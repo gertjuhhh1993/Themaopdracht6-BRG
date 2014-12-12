@@ -16,7 +16,7 @@ private static Connection c1;
 		//dbcon = new Oraclecon();
 		//c1 = dbcon.getConnection();
 		Generator g = new Generator();
-		g.generate();
+		g.generate("test");
 	}
 
 }

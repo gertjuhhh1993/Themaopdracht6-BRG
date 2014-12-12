@@ -17,10 +17,24 @@ public class Generator {
 	public Listener _unnamed_Listener_;
 	private HashMap<String, String> hm;
 
+	/**
+	 * Generate the businessrule with the following steps
+	 * 1. create a new businessrule
+	 * 2. set the name of the businessrule
+	 * 3. get the rest of the data for the businessrule from the tooldatabase
+	 * 4. read the templates for the specific database
+	 * 5. read the xmlfile with the placeholder definition to determine what to replace
+	 * 6. fill a map(hm) with the entry key and value
+	 * 7. call method to replace the placeholders with the correct values
+	 * @param brName
+	 * @throws InvalidPropertiesFormatException
+	 * @throws IOException
+	 * @throws SQLException
+	 */
 	public void generate(String brName) throws InvalidPropertiesFormatException, IOException, SQLException {
-		Businessrule br = new Businessrule();
-		br.setName(brName);
-		br.loadFromDbIntoObject();
+//		Businessrule br = new Businessrule();
+//		br.setName(brName);
+//		br.loadFromDbIntoObject();
 		this.prop = new Properties();
 		FileInputStream fis = new FileInputStream("Xml/RuleTemplates/oracle.xml");
 		prop.loadFromXML(fis);
