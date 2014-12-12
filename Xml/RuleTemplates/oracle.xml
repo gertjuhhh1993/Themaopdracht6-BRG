@@ -14,11 +14,7 @@
 	WHEN E_RANGEEXCEPTION THEN
 	  RAISE_APPLICATION_ERROR
 	        (-20001, 'E_RANGEEXCEPTION - Value cannot be between 
-	#value1 and #value2');
+	#value1 and #valuehaaloo1234');
 	END;</entry>
-	
-	<entry key="compare">
-	
-	</entry>
 </properties>
 
