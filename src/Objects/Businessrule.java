@@ -80,4 +80,16 @@ public class Businessrule {
 	public String getOperator() {
 		return this.operator;
 	}
+
+	public Value getValueByOrder(String orderNr) {
+		int order = Integer.parseInt(orderNr);
+		Value returnValue = null;
+		for(Value v:values){
+			if(v.getOrder() == order){
+				returnValue = v;
+				break;
+			}
+		}
+		return returnValue;
+	}
 }

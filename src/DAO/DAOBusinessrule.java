@@ -11,13 +11,14 @@ import java.util.InvalidPropertiesFormatException;
 import DButil.*;
 
 public class DAOBusinessrule implements DAO{
-	public void fetch(){}
+	
 	public ResultSet fetch(Object o) throws FileNotFoundException, InvalidPropertiesFormatException, IOException, SQLException {
 		String name = (String)o;
 		DBcon db = new Oraclecon();
 		Connection con = db.getConnection();
 		Statement st = con.createStatement();
 		ResultSet rs = st.executeQuery("SELECT * FROM Businessrule WHERE name=" + name);
+		con.close();
 		return rs;
 	}
 }

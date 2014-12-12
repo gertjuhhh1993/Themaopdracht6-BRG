@@ -22,7 +22,8 @@ public abstract class DBcon {
 	protected String serverName;
 	protected int portNumber;
 	protected Properties prop;
-
+	protected Connection conn = null;
+	
 	protected void setProperties(String fileName) throws FileNotFoundException,
 			IOException, InvalidPropertiesFormatException {
 		this.prop = new Properties();
@@ -43,4 +44,7 @@ public abstract class DBcon {
 	}
 
 	public abstract Connection getConnection() throws SQLException;
+	public final void closeConnection() throws SQLException{
+		conn.close();
+	}
 }

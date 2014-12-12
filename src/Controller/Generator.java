@@ -4,19 +4,22 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
+import Objects.Attribute;
 import Objects.Businessrule;
+import Objects.Value;
 
 public class Generator {
 	private Properties prop,p2;
 	private String template;
 	public Listener _unnamed_Listener_;
 	private HashMap<String, String> hm;
-
+	private Businessrule br = new Businessrule();
 	/**
 	 * Generate the businessrule with the following steps
 	 * 1. create a new businessrule
@@ -32,7 +35,7 @@ public class Generator {
 	 * @throws SQLException
 	 */
 	public void generate(String brName) throws InvalidPropertiesFormatException, IOException, SQLException {
-//		Businessrule br = new Businessrule();
+//		br = new Businessrule();
 //		br.setName(brName);
 //		br.loadFromDbIntoObject();
 		this.prop = new Properties();
@@ -64,14 +67,33 @@ public class Generator {
 		
 		for (HashMap.Entry<String, String> replacement : hm.entrySet()) {
 			unfinishedTemplate = unfinishedTemplate.replace(replacement.getKey(), replacement.getValue());
-			String[] array = replacement.getValue().split(".");
+			String[] array = replacement.getValue().split("\\.");
 			String object = array[0];
 			String attribute = array[1];
-			switch (object) {
-            case "businessrule": ;
-            break;
+			String replacingValue = "NoValueFound";
+//			
+//			private String businessruletype;
+//			private String operator;
+//			public ArrayList<Value> values = new ArrayList<Value>();
+//			public Attribute attribute;
+			if(object == "businessrule"){
+				switch (attribute) {
+	            case "name": replacingValue = br.getName();
+	            case "operator": replacingValue = br.getOperator();
+	            case "values": br.getValueByOrder(array[2]).getValue();
+	           // case "attributes": br.getAttributeByOrder(array[2]).getValue();
+	            break;
+				}
 			}
+			
 		}
+		
+		/*
+		 * BR_RNG_01
+		 * min == 1 --> 20
+		 * max == 2 --> 25
+		 * 
+		 */
 		finishedTemplate= unfinishedTemplate;
 		return finishedTemplate;
 	}

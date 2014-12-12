@@ -15,7 +15,7 @@ public class Oraclecon extends DBcon {
 		super.setProperties("Xml/Db/oracle-properties.xml");
 	}
 	public final Connection getConnection() throws SQLException{
-		Connection conn = null;
+		
 		
 		Properties connectionProps = new Properties();
 		connectionProps.put("user", super.userName);
@@ -36,4 +36,5 @@ public class Oraclecon extends DBcon {
 		System.out.println("Connected to database");
 		return conn;
 	}
+	
 }
