@@ -20,7 +20,15 @@ public class Businessrule {
 	public ArrayList<Value> values = new ArrayList<Value>();
 	public Attribute attribute;
 	public DAO dao;
-
+/**
+ * getInfo gets a resultset from the database based on the given type
+ * @param type specifies what you need to get from the database
+ * @throws FileNotFoundException
+ * @throws InvalidPropertiesFormatException
+ * @throws IOException
+ * @throws SQLException
+ * @return a resultset with the database entries of that type
+ */
 	public ResultSet getInfo(String type) throws FileNotFoundException, InvalidPropertiesFormatException, IOException, SQLException {
 		DAO dao = null;
 		if(type=="businessrule"){
@@ -32,7 +40,13 @@ public class Businessrule {
 		}
 		return dao.fetch(this.name);	
 	}
-
+	/**
+	 * loads the resultset from @see Businessrule#getInfo(String) into the corresponding object
+	 * @throws FileNotFoundException should the database not be found, this exception gets thrown.
+	 * @throws InvalidPropertiesFormatException Thrown to indicate that an operation could not complete because the input did not conform to the appropriate XML document type for a collection of properties
+	 * @throws IOException should the reading or writing to/from a file not succeed, this exception gets thrown.
+	 * @throws SQLException If the sql doesn't succeed, this exception gets thrown.
+	 */
 	public void loadFromDbIntoObject() throws FileNotFoundException, InvalidPropertiesFormatException, IOException, SQLException{
 		ResultSet rs = getInfo("businessrule");
 		this.setName(rs.getString("name"));
@@ -56,31 +70,61 @@ public class Businessrule {
 			//a.set
 		}
 	}
-	
+	/**
+	 * setter for the attribute name
+	 * 
+	 * @param name String which has to become the attribute name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	/**
+	 * getter for the attribute name
+	 * 
+	 * @return a String
+	 */
 	public String getName() {
 		return this.name;
 	}
 
+	/**
+	 * setter for the attribute businessruletype
+	 * 
+	 * @param businessruletype String which has to become the attribute businessruletype
+	 */
 	public void setBusinessruletype(String businessruletype) {
 		this.businessruletype = businessruletype;
 	}
-
+	/**
+	 * getter for the attribute businessruletype
+	 * 
+	 * @return a String
+	 */
 	public String getBusinessruletype() {
 		return this.businessruletype;
 	}
-
+	/**
+	 * setter for the attribute operator
+	 * 
+	 * @param operator String which has to become the attribute operator
+	 */
 	public void setOperator(String operator) {
 		this.operator = operator;
 	}
-
+	/**
+	 * getter for the attribute operator
+	 * 
+	 * @return a String
+	 */
 	public String getOperator() {
 		return this.operator;
 	}
 
+	/**
+	 * a method to get the values out of the values ArrayList
+	 * @param orderNr the order number from which the method has to search
+	 * @return a value that corresponds with the orderNr
+	 */
 	public Value getValueByOrder(String orderNr) {
 		int order = Integer.parseInt(orderNr);
 		Value returnValue = null;

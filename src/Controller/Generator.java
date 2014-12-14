@@ -61,7 +61,13 @@ public class Generator {
 	public void checkAvailableXML(Object aLanguage) {
 		throw new UnsupportedOperationException();
 	}
-	
+	/**
+	 * replacePlaceholderWithValues is a method that replaces
+	 * placeholder names with actual names. 
+	 * 
+	 * @param unfinishedTemplate A String which contains the values that the placeholder should become.
+	 * @return The value.
+	 */
 	public String replacePlaceholderWithValues(String unfinishedTemplate){
 		String finishedTemplate = "";
 		
