@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
-import Objects.Attribute;
 import Objects.Businessrule;
 import Objects.Value;
 

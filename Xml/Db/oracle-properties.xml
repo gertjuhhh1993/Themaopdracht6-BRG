@@ -5,10 +5,10 @@
   <entry key="dbms">oracle</entry>
   <entry key="jar_file"></entry>
   <entry key="driver"></entry>
-  <entry key="database_name">stud1649189</entry>
-  <entry key="user_name">stud1649189</entry>
-  <entry key="password">stud1649189</entry>
-  <entry key="server_name">145.89.21.30</entry>
-  <entry key="port_number">8521</entry>
-	<entry key="sid">cursus01</entry>
+  <entry key="database_name">tho6</entry>
+  <entry key="user_name">tho6</entry>
+  <entry key="password">tho6</entry>
+  <entry key="server_name">92.109.55.51</entry>
+  <entry key="port_number">1521</entry>
+	<entry key="sid">xe</entry>
 </properties>
