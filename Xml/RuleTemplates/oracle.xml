@@ -7,14 +7,14 @@
 	DECLARE
 	E_RANGEEXCEPTION EXCEPTION;
 	BEGIN
-	IF :new.#column #operator #value1 AND #value2 THEN
+	IF :new.#column1 #operator #value1 AND #value2 THEN
 	RAISE E_RANGEEXCEPTION;
 	END IF;
 	EXCEPTION
 	WHEN E_RANGEEXCEPTION THEN
 	  RAISE_APPLICATION_ERROR
-	        (-20001, 'E_RANGEEXCEPTION - Value cannot be between 
-	#value1 and #valuehaaloo1234');
+	        (-20001, 'E_RANGEEXCEPTION - #column1 cannot be between 
+	#value1 and #value2');
 	END;</entry>
 </properties>
 

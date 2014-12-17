@@ -35,7 +35,7 @@ public class DAOAttribute implements DAO{
 		DBcon db = new Oraclecon();
 		con = db.getConnection();
 		Statement st = con.createStatement();
-		ResultSet rs = st.executeQuery("SELECT * FROM Attribute WHERE businessrulenaam="+name);
+		ResultSet rs = st.executeQuery("SELECT * FROM Attribute WHERE businessrulenaam='"+name+"'");
 //		con.close();
 		return rs;
 	}

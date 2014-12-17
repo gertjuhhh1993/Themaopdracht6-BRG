@@ -71,34 +71,41 @@ public class Generator {
 		String finishedTemplate = "";
 		
 		for (HashMap.Entry<String, String> replacement : hm.entrySet()) {
-			unfinishedTemplate = unfinishedTemplate.replace(replacement.getKey(), replacement.getValue());
+			
 			String[] array = replacement.getValue().split("\\.");
 			String object = array[0];
 			String attribute = array[1];
 			String replacingValue = "NoValueFound";
-//			
-//			private String businessruletype;
-//			private String operator;
-//			public ArrayList<Value> values = new ArrayList<Value>();
-//			public Attribute attribute;
-			if(object == "businessrule"){
+			
+			if(object.equals("businessrule")){
 				switch (attribute) {
-	            case "name": replacingValue = br.getName();
-	            case "operator": replacingValue = br.getOperator();
-	            case "values": br.getValueByOrder(array[2]).getValue();
-	            case "attributes": br.getAttributeByOrder(array[2]).getValue();
-	            break;
+	            case "name": replacingValue = br.getName();break;
+	            case "operator": replacingValue = br.getOperator();break;
+	            case "values": 	switch(array[2] + ""){
+	            	case "all": br.getValues();
+	            	default: replacingValue = (array[3].equals("order") ==true
+	            			? br.getValueByOrder(array[2]).getOrder() + "" : 
+	            				(array[3].equals("value") ==true? br.getValueByOrder(array[2]).getValue(): replacingValue));
+	            	};break;
+	            case "attributes": 
+	            	switch(array[2]){
+	            	case "all": br.getValues();
+	            	default: replacingValue = (array[3].equals("order") 
+	            			? br.getValueByOrder(array[2]).getOrder() + "" 
+	            			: (array[3].equals("schema") 
+	            					? br.getAttributeByOrder(array[2]).getSchema()
+	            					: (array[3].equals("tabel") 
+	    	            					? br.getAttributeByOrder(array[2]).getTabel()
+	    	    	            			: (array[3].equals("kolom") 
+	    	    	    	            			? br.getAttributeByOrder(array[2]).getKolom()
+	    	    	    	    	            	: replacingValue))));
+	            	};break;
 				}
+				unfinishedTemplate = unfinishedTemplate.replace(replacement.getKey(), replacingValue);
 			}
 			
 		}
 		
-		/*
-		 * BR_RNG_01
-		 * min == 1 --> 20
-		 * max == 2 --> 25
-		 * 
-		 */
 		finishedTemplate= unfinishedTemplate;
 		return finishedTemplate;
 	}

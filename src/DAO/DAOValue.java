@@ -29,7 +29,8 @@ public class DAOValue implements DAO{
 		DBcon db = new Oraclecon();
 		con = db.getConnection();
 		Statement st = con.createStatement();
-		ResultSet rs = st.executeQuery("SELECT * FROM value WHERE businessrulenaam=" + name);
+		System.out.println(name);
+		ResultSet rs = st.executeQuery("SELECT * FROM value WHERE businessrulenaam='" + name + "'");
 //		con.close();
 		return rs;
 	}

@@ -19,7 +19,7 @@ private static Connection c1;
 //		rs.next();
 //		System.out.println(rs.getString("OPERATORNAAM"));
 		Generator g = new Generator();
-		g.generate("Testgert");
+		g.generate("BRG_LID_TRG_RNG_ORA_012");
 	}
 
 }

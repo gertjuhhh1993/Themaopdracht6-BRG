@@ -49,9 +49,10 @@ public class Businessrule {
 	 */
 	public void loadFromDbIntoObject() throws FileNotFoundException, InvalidPropertiesFormatException, IOException, SQLException{
 		ResultSet rs = getInfo("businessrule");
-		this.setName(rs.getString("name"));
-		this.setBusinessruletype(rs.getString("businessruletype"));
-		this.setOperator(rs.getString("operator"));
+		rs.next();
+		this.setName(rs.getString("BUSINESSRULENAAM"));
+		this.setBusinessruletype(rs.getString("BUSINESSRULETYPENAAM"));
+		this.setOperator(rs.getString("OPERATORNAAM"));
 		rs.close();
 		
 		rs = getInfo("value");
@@ -128,6 +129,18 @@ public class Businessrule {
 		return this.operator;
 	}
 
+	public ArrayList<Value> getValues() {
+		return values;
+	}
+	public void setValues(ArrayList<Value> values) {
+		this.values = values;
+	}
+	public ArrayList<Attribute> getAttributes() {
+		return attributes;
+	}
+	public void setAttributes(ArrayList<Attribute> attributes) {
+		this.attributes = attributes;
+	}
 	/**
 	 * a method to get the values out of the values ArrayList
 	 * @param orderNr the order number from which the method has to search
