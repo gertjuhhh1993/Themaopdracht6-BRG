@@ -17,9 +17,9 @@ public class Businessrule {
 	private String name;
 	private String businessruletype;
 	private String operator;
-	public ArrayList<Value> values = new ArrayList<Value>();
-	public Attribute attribute;
-	public DAO dao;
+	private ArrayList<Value> values = new ArrayList<Value>();
+	private ArrayList<Attribute> attributes = new ArrayList<Attribute>();
+	private DAO dao;
 /**
  * getInfo gets a resultset from the database based on the given type
  * @param type specifies what you need to get from the database
@@ -30,7 +30,7 @@ public class Businessrule {
  * @return a resultset with the database entries of that type
  */
 	public ResultSet getInfo(String type) throws FileNotFoundException, InvalidPropertiesFormatException, IOException, SQLException {
-		DAO dao = null;
+		dao = null;
 		if(type=="businessrule"){
 			dao = new DAOBusinessrule();
 		}else if(type=="attribute"){
@@ -57,7 +57,7 @@ public class Businessrule {
 		rs = getInfo("value");
 		while(rs.next()){
 			Value v = new Value();
-			v.setOrder(rs.getInt("order"));
+			v.setOrder(rs.getInt("valorder"));
 			v.setValue(rs.getString("value"));
 			
 			values.add(v);
@@ -67,8 +67,16 @@ public class Businessrule {
 		rs = getInfo("attribute");
 		while(rs.next()){
 			Attribute a = new Attribute();
-			//a.set
+			a.setOrder(rs.getInt("attorder"));
+			a.setSchema(rs.getString("schema"));
+			a.setTabel(rs.getString("tabel"));
+			a.setKolom(rs.getString("kolom"));
+			
+			attributes.add(a);
 		}
+		rs.close();
+		dao.closeConnection();
+		
 	}
 	/**
 	 * setter for the attribute name
@@ -135,5 +143,17 @@ public class Businessrule {
 			}
 		}
 		return returnValue;
+	}
+	
+	public Attribute getAttributeByOrder(String orderNr) {
+		int order = Integer.parseInt(orderNr);
+		Attribute returnAttribute = null;
+		for(Attribute a:attributes){
+			if(a.getOrder() == order){
+				returnAttribute = a;
+				break;
+			}
+		}
+		return returnAttribute;
 	}
 }

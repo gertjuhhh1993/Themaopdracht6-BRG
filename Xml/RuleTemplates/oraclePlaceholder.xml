@@ -7,7 +7,9 @@ after these definitions you can add what to replace the placeholders with. the k
 	
 
 <entry key="#triggername">businessrule.name</entry>
-<entry key="#column">attribute.kolom</entry>
+<entry key="#column1">businessrule.attributes.1.kolom</entry>
+<entry key="#scheme1">businessrule.attributes.1.schema</entry>
+<entry key="#table1">businessrule.attributes.1.tabel</entry>
 <entry key="#value1">businessrule.values.1</entry>
 <entry key="#values">businessrule.values.all</entry>
 

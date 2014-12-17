@@ -2,7 +2,7 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 	<entry key="range">CREATE or REPLACE TRIGGER #triggername
-	BEFORE INSERT or UPDATE OF #column ON #scheme,#table
+	BEFORE INSERT or UPDATE OF #column1 ON #scheme1,#table1
 	FOR EACH ROW
 	DECLARE
 	E_RANGEEXCEPTION EXCEPTION;

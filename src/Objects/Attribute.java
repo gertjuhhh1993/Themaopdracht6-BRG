@@ -2,7 +2,10 @@ package Objects;
 
 public class Attribute {
 	private int order;
-	private int value;
+	private String schema;
+	private String tabel; 
+	private String kolom;
+
 	/**
 	 * getter for the attribute order
 	 * @return an integer
@@ -18,20 +21,23 @@ public class Attribute {
 	public void setOrder(int order) {
 		this.order = order;
 	}
-	/**
-	 * getter for the attribute value
-	 * 
-	 * @return an integer
-	 */
-	public int getValue() {
-		return value;
+	public String getSchema() {
+		return schema;
 	}
-	/**
-	 * setter for the attribute value
-	 * 
-	 * @param value integer which has to become the attribute value
-	 */
-	public void setValue(int value) {
-		this.value = value;
+	public void setSchema(String schema) {
+		this.schema = schema;
 	}
+	public String getTabel() {
+		return tabel;
+	}
+	public void setTabel(String tabel) {
+		this.tabel = tabel;
+	}
+	public String getKolom() {
+		return kolom;
+	}
+	public void setKolom(String kolom) {
+		this.kolom = kolom;
+	}
+
 }

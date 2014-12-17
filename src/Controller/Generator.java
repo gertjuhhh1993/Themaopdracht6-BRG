@@ -34,9 +34,9 @@ public class Generator {
 	 * @throws SQLException
 	 */
 	public void generate(String brName) throws InvalidPropertiesFormatException, IOException, SQLException {
-//		br = new Businessrule();
-//		br.setName(brName);
-//		br.loadFromDbIntoObject();
+		br = new Businessrule();
+		br.setName(brName);
+		br.loadFromDbIntoObject();
 		this.prop = new Properties();
 		FileInputStream fis = new FileInputStream("Xml/RuleTemplates/oracle.xml");
 		prop.loadFromXML(fis);
@@ -86,7 +86,7 @@ public class Generator {
 	            case "name": replacingValue = br.getName();
 	            case "operator": replacingValue = br.getOperator();
 	            case "values": br.getValueByOrder(array[2]).getValue();
-	           // case "attributes": br.getAttributeByOrder(array[2]).getValue();
+	            case "attributes": br.getAttributeByOrder(array[2]).getValue();
 	            break;
 				}
 			}
