@@ -12,6 +12,7 @@ import DButil.DBcon;
 import DButil.Oraclecon;
 
 public class DAOAttribute implements DAO{
+	private Connection con;
 	/**
 	 * 
 	 * An empty constructor
@@ -32,10 +33,18 @@ public class DAOAttribute implements DAO{
 			InvalidPropertiesFormatException, IOException, SQLException {
 		String name = (String)o;
 		DBcon db = new Oraclecon();
-		Connection con = db.getConnection();
+		con = db.getConnection();
 		Statement st = con.createStatement();
 		ResultSet rs = st.executeQuery("SELECT * FROM Attribute WHERE businessrulenaam="+name);
-		con.close();
+//		con.close();
 		return rs;
+	}
+	
+	public void closeConnection(){
+		try {
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

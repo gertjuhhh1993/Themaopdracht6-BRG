@@ -12,6 +12,7 @@ import DButil.DBcon;
 import DButil.Oraclecon;
 
 public class DAOValue implements DAO{
+	private Connection con;
 	/**
 	 * The method fetch fetches a resultset from the database, specifically created for the Value object
 	 * @param o The object to store the resultset in.
@@ -26,11 +27,19 @@ public class DAOValue implements DAO{
 			InvalidPropertiesFormatException, IOException, SQLException {
 		String name = (String)o;
 		DBcon db = new Oraclecon();
-		Connection con = db.getConnection();
+		con = db.getConnection();
 		Statement st = con.createStatement();
 		ResultSet rs = st.executeQuery("SELECT * FROM value WHERE businessrulenaam=" + name);
-		con.close();
+//		con.close();
 		return rs;
+	}
+	
+	public void closeConnection(){
+		try {
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	
