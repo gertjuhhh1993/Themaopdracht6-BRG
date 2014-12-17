@@ -21,7 +21,7 @@ private static Connection c1;
 		ResultSet rs = dao.fetch("Testgert");
 		rs.next();
 		System.out.println(rs.getString("OPERATORNAAM"));
-		dao.
+		dao.closeConnection();
 //		Generator g = new Generator();
 //		g.generate("test");
 	}
