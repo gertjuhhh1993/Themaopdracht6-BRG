@@ -31,11 +31,11 @@ public class Businessrule {
  */
 	public ResultSet getInfo(String type) throws FileNotFoundException, InvalidPropertiesFormatException, IOException, SQLException {
 		dao = null;
-		if(type=="businessrule"){
+		if(type.equals("businessrule")){
 			dao = new DAOBusinessrule();
-		}else if(type=="attribute"){
+		}else if(type.equals("attribute")){
 			dao = new DAOAttribute();
-		}else if(type=="value"){
+		}else if(type.equals("value")){
 			dao = new DAOValue();
 		}
 		return dao.fetch(this.name);	
