@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-	<entry key="range">CREATE or REPLACE TRIGGER #triggername
+	<entry key="template">CREATE or REPLACE TRIGGER #triggername
 	BEFORE INSERT or UPDATE OF #column1 ON #scheme1,#table1
 	FOR EACH ROW
 	DECLARE

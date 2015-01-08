@@ -1,17 +1,15 @@
 package Controller;
 
+import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
 import Objects.Businessrule;
-import Objects.Value;
 
 public class Generator {
 	private Properties templateProperties,placeHolderProperties;
@@ -36,31 +34,54 @@ public class Generator {
 		br = new Businessrule();
 		br.setName(brName);
 		br.loadFromDbIntoObject();
+		String[] nameParts = br.getName().split("_");
+		/*
+		 * BRG_IDD_TRG_RNG_ORA_001
+		 * 0 = BRG = Businessrulegenerator
+		 * 1 = IDD = Naam van het veld. eerste 2 letters en laatste letter
+		 * 2 = TRG = Trigger
+		 * 3 = RNG = Rule type
+		 * 4 = ORA = Databasetype
+		 * 5 = 001 = Volgnummer
+		 */
 		
+		String databaseType = nameParts[4];
+		String ruleType = nameParts[3];
 		this.templateProperties = new Properties();
-		FileInputStream fisTemplate = new FileInputStream("Xml/RuleTemplates/oracle.xml");
-		templateProperties.loadFromXML(fisTemplate);
-		
-		this.placeHolderProperties = new Properties();
-		FileInputStream fisPlaceholder = new FileInputStream("Xml/RuleTemplates/oraclePlaceholder.xml");
-		placeHolderProperties.loadFromXML(fisPlaceholder);
-		
-		Enumeration<Object> keys= placeHolderProperties.keys();
-		placeHolderHashmap = new HashMap <String, String>();
-		while(keys.hasMoreElements()){
-			Object keyO = keys.nextElement();
-			String key = keyO.toString();
-			placeHolderHashmap.put(key, placeHolderProperties.getProperty(key));
-			System.out.println(key + " --- " + placeHolderProperties.getProperty(key));
+		String templateLocation = "Xml/RuleTemplates/" + databaseType + "/" + ruleType + ".xml";
+		String placeholderLocation = "Xml/RuleTemplates/" + databaseType + "/" + ruleType + "Placeholder.xml";
+		if(checkAvailableXML(templateLocation) && checkAvailableXML(placeholderLocation)){
+			FileInputStream fisTemplate = new FileInputStream(templateLocation);
+			templateProperties.loadFromXML(fisTemplate);
+			
+			this.placeHolderProperties = new Properties();
+			FileInputStream fisPlaceholder = new FileInputStream(placeholderLocation);
+			placeHolderProperties.loadFromXML(fisPlaceholder);
+			
+			Enumeration<Object> keys= placeHolderProperties.keys();
+			placeHolderHashmap = new HashMap <String, String>();
+			while(keys.hasMoreElements()){
+				Object keyO = keys.nextElement();
+				String key = keyO.toString();
+				placeHolderHashmap.put(key, placeHolderProperties.getProperty(key));
+				System.out.println(key + " --- " + placeHolderProperties.getProperty(key));
+			}
+			
+			this.ruleTemplate = this.templateProperties.getProperty("template");
+			System.out.println(ruleTemplate);
+			System.out.println(replacePlaceholderWithValues(ruleTemplate));
 		}
-		
-		this.ruleTemplate = this.templateProperties.getProperty("range");
-		System.out.println(ruleTemplate);
-		System.out.println(replacePlaceholderWithValues(ruleTemplate));
+		else{
+			//XML file doesn't exist
+		}
 	}
 
-	public void checkAvailableXML(Object aLanguage) {
-		throw new UnsupportedOperationException();
+	public boolean checkAvailableXML(String fileLocation) {
+		File f = new File(fileLocation);
+		if(f.isFile()) {
+			return true;
+		}
+		return false;
 	}
 	/**
 	 * replacePlaceholderWithValues is a method that replaces
