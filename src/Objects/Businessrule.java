@@ -49,33 +49,38 @@ public class Businessrule {
 	 */
 	public void loadFromDbIntoObject() throws FileNotFoundException, InvalidPropertiesFormatException, IOException, SQLException{
 		ResultSet rs = getInfo("businessrule");
-		rs.next();
-		this.setName(rs.getString("BUSINESSRULENAAM"));
-		this.setBusinessruletype(rs.getString("BUSINESSRULETYPENAAM"));
-		this.setOperator(rs.getString("OPERATORNAAM"));
-		rs.close();
 		
-		rs = getInfo("value");
-		while(rs.next()){
-			Value v = new Value();
-			v.setOrder(rs.getInt("valorder"));
-			v.setValue(rs.getString("value"));
+		if(rs.next()){
+			this.setName(rs.getString("BUSINESSRULENAAM"));
+			this.setBusinessruletype(rs.getString("BUSINESSRULETYPENAAM"));
+			this.setOperator(rs.getString("OPERATORNAAM"));
+			rs.close();
 			
-			values.add(v);
-		}
-		rs.close();
-		
-		rs = getInfo("attribute");
-		while(rs.next()){
-			Attribute a = new Attribute();
-			a.setOrder(rs.getInt("attorder"));
-			a.setSchema(rs.getString("schema"));
-			a.setTabel(rs.getString("tabel"));
-			a.setKolom(rs.getString("kolom"));
+			rs = getInfo("value");
+			while(rs.next()){
+				Value v = new Value();
+				v.setOrder(rs.getInt("valorder"));
+				v.setValue(rs.getString("value"));
+				
+				values.add(v);
+			}
+			rs.close();
 			
-			attributes.add(a);
+			rs = getInfo("attribute");
+			while(rs.next()){
+				Attribute a = new Attribute();
+				a.setOrder(rs.getInt("attorder"));
+				a.setSchema(rs.getString("schema"));
+				a.setTabel(rs.getString("tabel"));
+				a.setKolom(rs.getString("kolom"));
+				
+				attributes.add(a);
+			}
+			rs.close();
 		}
-		rs.close();
+		else{
+			System.out.println("This rule is not available in the database.");
+		}
 		dao.closeConnection();
 		
 	}
