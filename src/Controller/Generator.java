@@ -36,13 +36,25 @@ public class Generator {
 		br = new Businessrule();
 		br.setName(brName);
 		br.loadFromDbIntoObject();
+		String[] nameParts = br.getName().split("_");
+		/*
+		 * BRG_IDD_TRG_RNG_ORA_001
+		 * 0 = BRG = Businessrulegenerator
+		 * 1 = IDD = Naam van het veld. eerste 2 letters en laatste letter
+		 * 2 = TRG = Trigger
+		 * 3 = RNG = Rule type
+		 * 4 = ORA = Databasetype
+		 * 5 = 001 = Volgnummer
+		 */
 		
+		String databaseType = nameParts[4];
+		String ruleType = nameParts[3];
 		this.templateProperties = new Properties();
-		FileInputStream fisTemplate = new FileInputStream("Xml/RuleTemplates/oracle.xml");
+		FileInputStream fisTemplate = new FileInputStream("Xml/RuleTemplates/" + databaseType + "/" + ruleType + ".xml");
 		templateProperties.loadFromXML(fisTemplate);
 		
 		this.placeHolderProperties = new Properties();
-		FileInputStream fisPlaceholder = new FileInputStream("Xml/RuleTemplates/oraclePlaceholder.xml");
+		FileInputStream fisPlaceholder = new FileInputStream("Xml/RuleTemplates/" + databaseType + "/" + ruleType + "Placeholder.xml");
 		placeHolderProperties.loadFromXML(fisPlaceholder);
 		
 		Enumeration<Object> keys= placeHolderProperties.keys();
@@ -54,7 +66,7 @@ public class Generator {
 			System.out.println(key + " --- " + placeHolderProperties.getProperty(key));
 		}
 		
-		this.ruleTemplate = this.templateProperties.getProperty("range");
+		this.ruleTemplate = this.templateProperties.getProperty("template");
 		System.out.println(ruleTemplate);
 		System.out.println(replacePlaceholderWithValues(ruleTemplate));
 	}
