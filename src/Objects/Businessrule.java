@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.InvalidPropertiesFormatException;
+import java.util.logging.Logger;
 
 import DAO.DAO;
 import DAO.DAOAttribute;
@@ -79,7 +80,8 @@ public class Businessrule {
 			rs.close();
 		}
 		else{
-			System.out.println("This rule is not available in the database.");
+			Logger logger = Logger.getLogger("output");
+			logger.warning("This rule is not available in the database.");
 		}
 		dao.closeConnection();
 		
