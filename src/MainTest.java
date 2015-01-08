@@ -13,7 +13,7 @@ private static DBcon dbcon;
 private static Connection c1;
 	public static void main(String[] args) throws FileNotFoundException, InvalidPropertiesFormatException, IOException, SQLException {
 		Generator g = new Generator();
-		g.generate("BRG_IDD_TRG_RNG_ORA_013");
+		g.generate("BRG_IDD_TRG_RNG_ORB_013");
 	}
 
 }
