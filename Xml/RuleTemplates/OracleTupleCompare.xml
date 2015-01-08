@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="tuplecompare">
+	CREATE or REPLACE TRIGGER #triggername
+		BEFORE INSERT or UPDATE OF #column1 OR #column2 ON #scheme1,#table1
+		FOR EACH ROW
+		DECLARE
+		E_TUPLECOMPAREEXCEPTION EXCEPTION;
+		BEGIN
+		IF NOT #column1 #operator #column2 THEN
+		RAISE E_TUPLECOMPAREEXCEPTION;
+		WHEN E_TUPLECOMPAREEXCEPTION THEN
+		RAISE_APPLICATION_ERROR
+		(-20001, 'E_TUPLECOMPAREEXCEPTION - insert error message');
+		END;
+	
+
+	</entry>
+</properties>
+	

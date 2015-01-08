@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="compare">
+		CREATE or REPLACE TRIGGER #triggername
+		BEFORE INSERT or UPDATE OF #column1 ON #scheme1,#table1
+		FOR EACH ROW
+		DECLARE
+		E_COMPAREALNUMEXCEPTION EXCEPTION;
+		E_COMPAREOPERATOREXCEPTION EXCEPTION;
+		BEGIN
+		IF NOT REGEXP_LIKE(#column1,'[[:alnum:]]') THEN
+		RAISE E_COMPAREALNUMEXCEPTION;
+		END IF;
+		IF NOT #column1 #operator #value1 THEN
+		RAISE E_COMPAREOPERATOREXCEPTION;
+		END IF;
+		WHEN E_COMPAREALNUMEXCEPTION THEN
+		RAISE_APPLICATION_ERROR
+		(-20001, 'E_COMPAREALNUMEXCEPTION - #column1 is not alphanumeric');
+		WHEN E_COMPAREOPERATOREXCEPTION THEN
+		RAISE_APPLICATION_ERROR
+		(-20001, 'E_COMPAREOPERATOREXCEPTION - insert error message');
+		END;
+
+	</entry>
+</properties>	

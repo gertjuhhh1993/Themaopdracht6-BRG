@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="intercompare">
+	CREATE or REPLACE TRIGGER #triggername
+		BEFORE INSERT or UPDATE OF #column1 OR #column2 ON #scheme1,#table2,#table1
+		FOR EACH ROW
+		DECLARE
+		E_INTERCOMPAREEXCEPTION EXCEPTION;
+		BEGIN
+		IF NOT #column1 #operator #column2 THEN
+		RAISE E_INTERCOMPAREEXCEPTION;
+		WHEN E_INTERCOMPAREEXCEPTION THEN
+		RAISE_APPLICATION_ERROR
+		(-20001, 'E_INTERCOMPAREEXCEPTION - insert error message');
+		END;
+	
+
+	</entry>
+</properties>
+	
