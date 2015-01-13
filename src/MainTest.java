@@ -27,7 +27,6 @@ private static Connection c1;
 		}
 		logger.setLevel(Level.ALL);
 		logger.info("Logger is actief");
-		g.generate("BRG_IDD_TRG_ARNG_ORA_021");
+		g.generate("BRG_IDD_TRG_ACMP_ORA_022");
 	}
-
 }
