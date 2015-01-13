@@ -103,12 +103,15 @@ public class Generator {
 				switch (attribute) {
 	            case "name": replacingValue = br.getName();break;
 	            case "operator": replacingValue = br.getOperator();break;
-	            case "values": 	switch(valueParts[2] + ""){
-	            	case "all": br.getValues();
+	            case "values": 
+	            	String[] values = replaceValues(br); 
+	            	switch(valueParts[2] + ""){
+	            	case "all": values;
 	            	default: replacingValue = (valueParts[3].equals("order") ==true
-	            			? br.getValueByOrder(valueParts[2]).getOrder() + "" : 
-	            				(valueParts[3].equals("value") ==true? br.getValueByOrder(valueParts[2]).getValue(): replacingValue));
+	            			? valueParts[2]) + "" : 
+	            				(valueParts[3].equals("value") ==true? value[integer.parseint(valueParts[2])-1]: replacingValue));
 	            	};break;
+	            	
 	            case "attributes": 
 	            	switch(valueParts[2]){
 	            	case "all": br.getValues();
@@ -129,5 +132,19 @@ public class Generator {
 		
 		finishedTemplate= unfinishedTemplate;
 		return finishedTemplate;
+	}
+	public String[] replaceValue(BusinessRule rule) {
+		String[] result = null;
+		Value[] valueList = rule.getValues;
+		for(Value v : valueList) {
+			if(v.getDatatype.equals("String") {
+				result.add("'"+v.getValue()+"'";
+			} else if(v.getDatatype.equals("Number") {
+				result.add(v.getValue());
+			} else if(v.getDatatype.equals("Date") {
+				
+			}
+		}
+		return result;
 	}
 }
