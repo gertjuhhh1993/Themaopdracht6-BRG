@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 public abstract class DBcon {
 	protected String dbms;
@@ -41,6 +42,7 @@ public abstract class DBcon {
 		this.portNumber = Integer
 				.parseInt(this.prop.getProperty("port_number"));
 		System.out.print(prop);
+		Logger logger = Logger.getLogger("defaultLogger");
 	}
 
 	public abstract Connection getConnection() throws SQLException;

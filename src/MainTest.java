@@ -17,7 +17,7 @@ private static DBcon dbcon;
 private static Connection c1;
 	public static void main(String[] args) throws FileNotFoundException, InvalidPropertiesFormatException, IOException, SQLException {
 		Generator g = new Generator();
-		Logger logger = Logger.getLogger("output");
+		Logger logger = Logger.getLogger("defaultLogger");
 		try {
 			FileHandler fh = new FileHandler("log.txt");
 			fh.setFormatter(new SimpleFormatter());
@@ -27,7 +27,7 @@ private static Connection c1;
 		}
 		logger.setLevel(Level.ALL);
 		logger.info("Logger is actief");
-		g.generate("BRG_IDD_TRG_RNG_ORB_013");
+		g.generate("BRG_IDD_TRG_ARNG_ORA_021");
 	}
 
 }

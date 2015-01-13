@@ -4,9 +4,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.InvalidPropertiesFormatException;
+import java.util.Iterator;
 import java.util.Properties;
 
 import Objects.Businessrule;
@@ -105,12 +107,21 @@ public class Generator {
 	            case "name": replacingValue = br.getName();break;
 	            case "operator": replacingValue = br.getOperator();break;
 	            case "values": 
-	            	String[] values = replaceValues(br); 
+	            	ArrayList<String> values = replaceValue(br); 
 	            	switch(valueParts[2] + ""){
-	            	case "all": values;
+	            	case "all": Iterator<String> i = values.iterator(); 
+	                replacingValue="";
+	                 while(i.hasNext()){
+	                  
+	                  String tmpV = i.next();
+	                  replacingValue += tmpV;
+	                  if(i.hasNext()){
+	                   replacingValue += ",";
+	                   }
+	                  }break;
 	            	default: replacingValue = (valueParts[3].equals("order") ==true
-	            			? valueParts[2]) + "" : 
-	            				(valueParts[3].equals("value") ==true? values[Integer.parseInt(valueParts[2])-1]: replacingValue));
+	            			? valueParts[2] + "" : 
+	            				(valueParts[3].equals("value") ==true? values.get(Integer.parseInt(valueParts[2])-1): replacingValue));
 	            	};break;
 	            	
 	            case "attributes": 
@@ -134,15 +145,15 @@ public class Generator {
 		finishedTemplate= unfinishedTemplate;
 		return finishedTemplate;
 	}
-	public String[] replaceValue(Businessrule rule) {
-		String[] result = null;
-		Value[] valueList = rule.getValues();
+	public ArrayList<String> replaceValue(Businessrule rule) {
+		ArrayList<String> result = new ArrayList<String>();
+		ArrayList<Value> valueList = rule.getValues();
 		for(Value v : valueList) {
-			if(v.getDatatype.equals("String") {
-				result.add("'"+v.getValue()+"'";
-			} else if(v.getDatatype.equals("Number") {
+			if(v.getDatatype().equals("String")) {
+				result.add("'"+v.getValue()+"'");
+			} else if(v.getDatatype().equals("Number")) {
 				result.add(v.getValue());
-			} else if(v.getDatatype.equals("Date") {
+			} else if(v.getDatatype().equals("Date")) {
 				//TODO: do something
 			}
 		}

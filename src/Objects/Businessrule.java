@@ -62,6 +62,7 @@ public class Businessrule {
 				Value v = new Value();
 				v.setOrder(rs.getInt("valorder"));
 				v.setValue(rs.getString("value"));
+				v.setDatatype(rs.getString("datatype"));
 				
 				values.add(v);
 			}

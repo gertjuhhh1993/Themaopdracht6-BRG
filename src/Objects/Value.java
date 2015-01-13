@@ -8,7 +8,7 @@ public class Value {
 	public void setDatatype(String Datatype) {
 		this.Datatype = Datatype;
 	}
-	public String getGetDatatype() {
+	public String getDatatype() {
 		return Datatype;
 	}
 	/**
