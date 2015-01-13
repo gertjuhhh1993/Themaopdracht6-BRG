@@ -1,0 +1,2 @@
+Jan 13, 2015 11:01:52 AM MainTest main
+INFO: Logger is actief

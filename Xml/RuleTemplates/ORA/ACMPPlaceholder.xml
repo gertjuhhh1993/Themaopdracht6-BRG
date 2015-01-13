@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="#triggername">businessrule.name</entry>
+	<entry key="#column1">businessrule.attributes.1.kolom</entry>
+	<entry key="#scheme1">businessrule.attributes.1.schema</entry>
+	<entry key="#table1">businessrule.attributes.1.tabel</entry>
+	<entry key="#value1">businessrule.values.1.value</entry>
+	<entry key="#operator">businessrule.operator</entry>
+</properties>

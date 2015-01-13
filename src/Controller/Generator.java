@@ -7,9 +7,14 @@ import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.InvalidPropertiesFormatException;
+import java.util.Iterator;
 import java.util.Properties;
 
+import oracle.net.aso.e;
+import Exception.XmlNotFoundException;
+import Objects.Attribute;
 import Objects.Businessrule;
+import Objects.Value;
 
 public class Generator {
 	private Properties templateProperties,placeHolderProperties;
@@ -71,17 +76,16 @@ public class Generator {
 			System.out.println(ruleTemplate);
 			System.out.println(replacePlaceholderWithValues(ruleTemplate));
 		}
-		else{
-			//XML file doesn't exist
-		}
 	}
 
-	public boolean checkAvailableXML(String fileLocation) {
+	public boolean checkAvailableXML(String fileLocation) throws XmlNotFoundException {
 		File f = new File(fileLocation);
 		if(f.isFile()) {
 			return true;
 		}
-		return false;
+		XmlNotFoundException fileNotFound = new XmlNotFoundException(fileLocation);
+		throw fileNotFound;
+		
 	}
 	/**
 	 * replacePlaceholderWithValues is a method that replaces
@@ -104,14 +108,32 @@ public class Generator {
 	            case "name": replacingValue = br.getName();break;
 	            case "operator": replacingValue = br.getOperator();break;
 	            case "values": 	switch(valueParts[2] + ""){
-	            	case "all": br.getValues();
+	            	case "all": Iterator<Value> i = br.getValues().iterator(); 
+	            	replacingValue="";
+	            		while(i.hasNext()){
+	            			
+	            			Value tmpV = i.next();
+	            			replacingValue += tmpV.getValue();
+	            			if(i.hasNext()){
+	            				replacingValue += ",";
+	            				}
+	            			}break;
 	            	default: replacingValue = (valueParts[3].equals("order") ==true
 	            			? br.getValueByOrder(valueParts[2]).getOrder() + "" : 
 	            				(valueParts[3].equals("value") ==true? br.getValueByOrder(valueParts[2]).getValue(): replacingValue));
 	            	};break;
 	            case "attributes": 
 	            	switch(valueParts[2]){
-	            	case "all": br.getValues();
+	            	case "all": Iterator<Attribute> i = br.getAttributes().iterator(); 
+	            	replacingValue="";
+            		while(i.hasNext()){
+            			
+            			Attribute tmpA = i.next();
+            			replacingValue += tmpA.getKolom();
+            			if(i.hasNext()){
+            				replacingValue += ",";
+            				}
+            			}break;
 	            	default: replacingValue = (valueParts[3].equals("order") 
 	            			? br.getValueByOrder(valueParts[2]).getOrder() + "" 
 	            			: (valueParts[3].equals("schema") 
