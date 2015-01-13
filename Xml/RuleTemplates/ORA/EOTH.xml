@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="entityother">CREATE or REPLACE TRIGGER #triggername
+	BEFORE INSERT or UPDATE OF #column1 ON #scheme1,#table1
+	FOR EACH ROW
+	DECLARE
+	E_ENTITYOTHEREXCEPTION EXCEPTION;
+	BEGIN
+	
+	EXCEPTION
+	WHEN E_ENTITYOTHEREXCEPTION THEN
+	  RAISE_APPLICATION_ERROR
+	        (-20001, 'E_ENTITYOTHEREXCEPTION - INSERT ERROR MESSAGE');
+	END;</entry>
+</properties>
+
