@@ -3,7 +3,14 @@ package Objects;
 public class Value {
 	private int order;
 	private String value;
+	public String Datatype;
 	
+	public void setDatatype(String Datatype) {
+		this.Datatype = Datatype;
+	}
+	public String getGetDatatype() {
+		return Datatype;
+	}
 	/**
 	 * getter for the attribute order
 	 * @return an integer

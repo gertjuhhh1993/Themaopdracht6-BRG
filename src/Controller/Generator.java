@@ -10,6 +10,7 @@ import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
 import Objects.Businessrule;
+import Objects.Value;
 
 public class Generator {
 	private Properties templateProperties,placeHolderProperties;
@@ -109,7 +110,7 @@ public class Generator {
 	            	case "all": values;
 	            	default: replacingValue = (valueParts[3].equals("order") ==true
 	            			? valueParts[2]) + "" : 
-	            				(valueParts[3].equals("value") ==true? value[integer.parseint(valueParts[2])-1]: replacingValue));
+	            				(valueParts[3].equals("value") ==true? values[Integer.parseInt(valueParts[2])-1]: replacingValue));
 	            	};break;
 	            	
 	            case "attributes": 
@@ -133,16 +134,16 @@ public class Generator {
 		finishedTemplate= unfinishedTemplate;
 		return finishedTemplate;
 	}
-	public String[] replaceValue(BusinessRule rule) {
+	public String[] replaceValue(Businessrule rule) {
 		String[] result = null;
-		Value[] valueList = rule.getValues;
+		Value[] valueList = rule.getValues();
 		for(Value v : valueList) {
 			if(v.getDatatype.equals("String") {
 				result.add("'"+v.getValue()+"'";
 			} else if(v.getDatatype.equals("Number") {
 				result.add(v.getValue());
 			} else if(v.getDatatype.equals("Date") {
-				
+				//TODO: do something
 			}
 		}
 		return result;
