@@ -21,7 +21,7 @@ public class DAOAttribute implements DAO{
 
 	/**
 	 * The method fetch fetches a resultset from the database, specifically created for the Attribute object
-	 * @param o The object to store the resultset in.
+	 * @param o This is the name of the businessrule.
 	 * @throws FileNotFoundException should the database not be found, this exception gets thrown.
 	 * @throws InvalidPropertiesFormatException Thrown to indicate that an operation could not complete because the input did not conform to the appropriate XML document type for a collection of properties
 	 * @throws IOException should the reading or writing to/from a file not succeed, this exception gets thrown.

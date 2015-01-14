@@ -11,6 +11,7 @@ import java.util.InvalidPropertiesFormatException;
 import java.util.Iterator;
 import java.util.Properties;
 
+import Exception.XmlNotFoundException;
 import Objects.Businessrule;
 import Objects.Value;
 
@@ -24,7 +25,7 @@ public class Generator {
 	 * 1. create a new businessrule
 	 * 2. set the name of the businessrule
 	 * 3. get the rest of the data for the businessrule from the tooldatabase
-	 * 4. read the templates for the specific database
+	 * 4. read the templates for the specific database and check if the files exist
 	 * 5. read the xmlfile with the placeholder definition to determine what to replace
 	 * 6. fill a map(placeHolderHashmap) with the entry key and value
 	 * 7. call method to replace the placeholders with the correct values
@@ -74,24 +75,28 @@ public class Generator {
 			System.out.println(ruleTemplate);
 			System.out.println(replacePlaceholderWithValues(ruleTemplate));
 		}
-		else{
-			//XML file doesn't exist
-		}
 	}
 
-	public boolean checkAvailableXML(String fileLocation) {
+	/**
+	 * confirm the existence of the xml file at the specified location. If the file is not found an Exception will be thrown. 
+	 * @param fileLocation
+	 * @return
+	 * @throws XmlNotFoundException
+	 */
+	public boolean checkAvailableXML(String fileLocation) throws XmlNotFoundException {
 		File f = new File(fileLocation);
 		if(f.isFile()) {
 			return true;
 		}
-		return false;
+		XmlNotFoundException fileNotFound = new XmlNotFoundException(fileLocation);
+		throw fileNotFound;
 	}
 	/**
 	 * replacePlaceholderWithValues is a method that replaces
 	 * placeholder names with actual names. 
 	 * 
-	 * @param unfinishedTemplate A String which contains the values that the placeholder should become.
-	 * @return The value.
+	 * @param unfinishedTemplate A String which contains the full template. It contains placeholders which will be replaced.
+	 * @return The rule template with relevant information.
 	 */
 	public String replacePlaceholderWithValues(String unfinishedTemplate){
 		String finishedTemplate = "";
@@ -145,6 +150,12 @@ public class Generator {
 		finishedTemplate= unfinishedTemplate;
 		return finishedTemplate;
 	}
+	
+	/**
+	 * Method to return the value with the correct format. for example a string will have be surrounded by single quotes.
+	 * @param rule
+	 * @return
+	 */
 	public ArrayList<String> replaceValue(Businessrule rule) {
 		ArrayList<String> result = new ArrayList<String>();
 		ArrayList<Value> valueList = rule.getValues();

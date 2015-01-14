@@ -23,7 +23,7 @@ public class Businessrule {
 	private DAO dao;
 /**
  * getInfo gets a resultset from the database based on the given type
- * @param type specifies what you need to get from the database
+ * @param type specifies what you need to fetch from the database
  * @throws FileNotFoundException
  * @throws InvalidPropertiesFormatException
  * @throws IOException
