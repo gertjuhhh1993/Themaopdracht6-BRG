@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Iterator;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 import Objects.Businessrule;
 import Objects.Value;
@@ -34,6 +35,8 @@ public class Generator {
 	 * @throws SQLException
 	 */
 	public void generate(String brName) throws InvalidPropertiesFormatException, IOException, SQLException {
+		Logger logger = Logger.getLogger("defaultLogger");
+		logger.info("Generating businessrule with the name: "+brName);
 		br = new Businessrule();
 		br.setName(brName);
 		br.loadFromDbIntoObject();
@@ -63,19 +66,22 @@ public class Generator {
 			
 			Enumeration<Object> keys= placeHolderProperties.keys();
 			placeHolderHashmap = new HashMap <String, String>();
+			logger.info("--Getting properties--");
 			while(keys.hasMoreElements()){
 				Object keyO = keys.nextElement();
 				String key = keyO.toString();
 				placeHolderHashmap.put(key, placeHolderProperties.getProperty(key));
-				System.out.println(key + " --- " + placeHolderProperties.getProperty(key));
+				logger.info(key + " --- " + placeHolderProperties.getProperty(key));
 			}
 			
 			this.ruleTemplate = this.templateProperties.getProperty("template");
-			System.out.println(ruleTemplate);
-			System.out.println(replacePlaceholderWithValues(ruleTemplate));
+			logger.info("--Getting template--");
+			logger.info(ruleTemplate);
+			logger.info("--Generating replaced template--");
+			logger.info(replacePlaceholderWithValues(ruleTemplate));
 		}
 		else{
-			//XML file doesn't exist
+			logger.severe("No XML file found for this businessrule");
 		}
 	}
 

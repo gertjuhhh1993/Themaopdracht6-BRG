@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 public class MySQLcon extends DBcon {
 	
@@ -15,6 +16,7 @@ public class MySQLcon extends DBcon {
 		super.setProperties("Xml/Db/mysql-properties.xml");
 	}
 	public final Connection getConnection() throws SQLException{
+		Logger logger = Logger.getLogger("defaultLogger");
 		Connection conn = null;
 		
 		Properties connectionProps = new Properties();
@@ -33,7 +35,7 @@ public class MySQLcon extends DBcon {
 			this.urlString = currentUrlString + this.dbName;
 			conn.setCatalog(this.dbName);
 		
-		System.out.println("Connected to database");
+		logger.info("Connected to mysql database");
 		return conn;
 	}
 }

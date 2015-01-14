@@ -49,6 +49,8 @@ public class Businessrule {
 	 * @throws SQLException If the sql doesn't succeed, this exception gets thrown.
 	 */
 	public void loadFromDbIntoObject() throws FileNotFoundException, InvalidPropertiesFormatException, IOException, SQLException{
+		Logger logger = Logger.getLogger("defaultLogger");
+		logger.info("Loading rule from database");
 		ResultSet rs = getInfo("businessrule");
 		
 		if(rs.next()){
@@ -81,7 +83,6 @@ public class Businessrule {
 			rs.close();
 		}
 		else{
-			Logger logger = Logger.getLogger("output");
 			logger.warning("This rule is not available in the database.");
 		}
 		dao.closeConnection();

@@ -27,6 +27,7 @@ public abstract class DBcon {
 	
 	protected void setProperties(String fileName) throws FileNotFoundException,
 			IOException, InvalidPropertiesFormatException {
+		Logger logger = Logger.getLogger("defaultLogger");
 		this.prop = new Properties();
 		FileInputStream fis = new FileInputStream(fileName);
 		prop.loadFromXML(fis);
@@ -41,8 +42,8 @@ public abstract class DBcon {
 		this.serverName = this.prop.getProperty("server_name");
 		this.portNumber = Integer
 				.parseInt(this.prop.getProperty("port_number"));
-		System.out.print(prop);
-		Logger logger = Logger.getLogger("defaultLogger");
+		logger.info("Server properties: "+prop);
+		
 	}
 
 	public abstract Connection getConnection() throws SQLException;

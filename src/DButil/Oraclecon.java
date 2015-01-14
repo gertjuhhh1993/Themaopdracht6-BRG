@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 public class Oraclecon extends DBcon {
 	
@@ -15,7 +16,7 @@ public class Oraclecon extends DBcon {
 		super.setProperties("Xml/Db/oracle-properties.xml");
 	}
 	public final Connection getConnection() throws SQLException{
-		
+		Logger logger = Logger.getLogger("defaultLogger");
 		
 		Properties connectionProps = new Properties();
 		connectionProps.put("user", super.userName);
@@ -33,7 +34,7 @@ public class Oraclecon extends DBcon {
 			this.urlString = currentUrlString + this.dbName;
 			conn.setCatalog(this.dbName);
 		
-		System.out.println("Connected to database");
+		logger.info("Connected to oracle database");
 		return conn;
 	}
 	

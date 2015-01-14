@@ -1,2 +1,68 @@
-Jan 13, 2015 1:08:33 PM MainTest main
+Jan 14, 2015 12:36:40 PM MainTest main
 INFO: Logger is actief
+Jan 14, 2015 12:36:40 PM Controller.Generator generate
+INFO: Generating businessrule with the name: BRG_IDD_TRG_ARNG_ORA_021
+Jan 14, 2015 12:36:40 PM DButil.DBcon setProperties
+INFO: Server properties: {server_name=92.109.55.51, sid=xe, dbms=oracle, jar_file=, user_name=tho6, port_number=1521, database_name=tho6, password=tho6, driver=}
+Jan 14, 2015 12:36:41 PM DButil.Oraclecon getConnection
+INFO: Connected to oracle database
+Jan 14, 2015 12:36:41 PM DButil.DBcon setProperties
+INFO: Server properties: {server_name=92.109.55.51, sid=xe, dbms=oracle, jar_file=, user_name=tho6, port_number=1521, database_name=tho6, password=tho6, driver=}
+Jan 14, 2015 12:36:41 PM DButil.Oraclecon getConnection
+INFO: Connected to oracle database
+Jan 14, 2015 12:36:41 PM DButil.DBcon setProperties
+INFO: Server properties: {server_name=92.109.55.51, sid=xe, dbms=oracle, jar_file=, user_name=tho6, port_number=1521, database_name=tho6, password=tho6, driver=}
+Jan 14, 2015 12:36:41 PM DButil.Oraclecon getConnection
+INFO: Connected to oracle database
+Jan 14, 2015 12:36:41 PM Controller.Generator generate
+INFO: --Getting properties--
+Jan 14, 2015 12:36:41 PM Controller.Generator generate
+INFO: #operator --- businessrule.operator
+Jan 14, 2015 12:36:41 PM Controller.Generator generate
+INFO: #column1 --- businessrule.attributes.1.kolom
+Jan 14, 2015 12:36:41 PM Controller.Generator generate
+INFO: #value2 --- businessrule.values.2.value
+Jan 14, 2015 12:36:41 PM Controller.Generator generate
+INFO: #value1 --- businessrule.values.1.value
+Jan 14, 2015 12:36:41 PM Controller.Generator generate
+INFO: #table1 --- businessrule.attributes.1.tabel
+Jan 14, 2015 12:36:41 PM Controller.Generator generate
+INFO: #triggername --- businessrule.name
+Jan 14, 2015 12:36:41 PM Controller.Generator generate
+INFO: #scheme1 --- businessrule.attributes.1.schema
+Jan 14, 2015 12:36:41 PM Controller.Generator generate
+INFO: --Getting template--
+Jan 14, 2015 12:36:41 PM Controller.Generator generate
+INFO: CREATE or REPLACE TRIGGER #triggername
+	BEFORE INSERT or UPDATE OF #column1 ON #scheme1,#table1
+	FOR EACH ROW
+	DECLARE
+	E_RANGEEXCEPTION EXCEPTION;
+	BEGIN
+	IF :new.#column1 #operator #value1 AND #value2 THEN
+	RAISE E_RANGEEXCEPTION;
+	END IF;
+	EXCEPTION
+	WHEN E_RANGEEXCEPTION THEN
+	  RAISE_APPLICATION_ERROR
+	        (-20001, 'E_RANGEEXCEPTION - #column1 cannot be between 
+	#value1 and #value2');
+	END;
+Jan 14, 2015 12:36:41 PM Controller.Generator generate
+INFO: --Generating replaced template--
+Jan 14, 2015 12:36:41 PM Controller.Generator generate
+INFO: CREATE or REPLACE TRIGGER BRG_IDD_TRG_ARNG_ORA_021
+	BEFORE INSERT or UPDATE OF ID ON RAD,LID
+	FOR EACH ROW
+	DECLARE
+	E_RANGEEXCEPTION EXCEPTION;
+	BEGIN
+	IF :new.ID Between 1 AND 100 THEN
+	RAISE E_RANGEEXCEPTION;
+	END IF;
+	EXCEPTION
+	WHEN E_RANGEEXCEPTION THEN
+	  RAISE_APPLICATION_ERROR
+	        (-20001, 'E_RANGEEXCEPTION - ID cannot be between 
+	1 and 100');
+	END;
