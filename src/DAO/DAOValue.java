@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.InvalidPropertiesFormatException;
+import java.util.logging.Logger;
 
 import DButil.DBcon;
 import DButil.Oraclecon;
@@ -31,7 +32,6 @@ public class DAOValue implements DAO{
 		Statement st = con.createStatement();
 		System.out.println(name);
 		ResultSet rs = st.executeQuery("SELECT * FROM value WHERE businessrulenaam='" + name + "'");
-//		con.close();
 		return rs;
 	}
 	
@@ -42,18 +42,4 @@ public class DAOValue implements DAO{
 			e.printStackTrace();
 		}
 	}
-
-	
-	/*
-	 * 
-	 * 	public ResultSet fetch(Object o) throws FileNotFoundException, InvalidPropertiesFormatException, IOException, SQLException {
-		String name = (String)o;
-		DBcon db = new Oraclecon();
-		Connection con = db.getConnection();
-		Statement st = con.createStatement();
-		ResultSet rs = st.executeQuery("SELECT * FROM Businessrule WHERE name=" + name);
-		con.close();
-		return rs;
-	}
-	 */
 }

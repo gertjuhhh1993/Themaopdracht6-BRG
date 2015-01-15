@@ -28,7 +28,6 @@ public class DAOBusinessrule implements DAO{
 		con = db.getConnection();
 		Statement st = con.createStatement();
 		ResultSet rs = st.executeQuery("SELECT * FROM Businessrule WHERE BUSINESSRULENAAM='" + name + "'");
-		//con.close();
 		return rs;
 	}
 	
