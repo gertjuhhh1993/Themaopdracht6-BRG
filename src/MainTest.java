@@ -8,8 +8,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-import Controller.Generator;
-import DButil.DBcon;
+import controller.Generator;
+import dbutil.DBcon;
 
 
 public class MainTest {

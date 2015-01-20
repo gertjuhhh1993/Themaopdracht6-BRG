@@ -12,18 +12,18 @@
 	<target depends="init" name="build">
 		<javac srcdir="." destdir="classes" source="1.5" target="1.5" fork="yes">
 			<classpath refid="build.classpath"/>
-			<include name="Objects/Attribute.java"/>
-			<include name="Objects/Value.java"/>
-			<include name="Objects/Businessrule.java"/>
-			<include name="DAO/DAOAttribute.java"/>
-			<include name="DAO/DAOBusinessrule.java"/>
-			<include name="DAO/DAOValue.java"/>
-			<include name="DAO/DAO.java"/>
-			<include name="Controller/Listener.java"/>
-			<include name="Controller/Generator.java"/>
-			<include name="Controller/Oraclecon.java"/>
-			<include name="DButil/MySQLcon.java"/>
-			<include name="DButil/DBcon.java"/>
+			<include name="model/Attribute.java"/>
+			<include name="model/Value.java"/>
+			<include name="model/Businessrule.java"/>
+			<include name="dao/DAOAttribute.java"/>
+			<include name="dao/DAOBusinessrule.java"/>
+			<include name="dao/DAOValue.java"/>
+			<include name="dao/DAO.java"/>
+			<include name="controller/Listener.java"/>
+			<include name="controller/Generator.java"/>
+			<include name="controller/Oraclecon.java"/>
+			<include name="dbutil/MySQLcon.java"/>
+			<include name="dbutil/DBcon.java"/>
 		</javac>
 	</target>
 </project>
